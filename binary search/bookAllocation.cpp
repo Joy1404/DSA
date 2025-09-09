@@ -22,9 +22,6 @@ int ispossible(int pages, int students, vector<int> &a){
         }
         else{
             studentcount++;
-            if(studentcount > students || a[i] > pages){
-                return false;
-            }
             pagesum = a[i];
         }
     }
