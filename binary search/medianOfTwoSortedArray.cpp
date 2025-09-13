@@ -2,8 +2,8 @@
 using namespace std;
 // optimal approach
 // time complexity O(log(min(n1,n2))) space complexity O(1)
-int findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
-    if(nums1.size()>nums2.size()) return findMedianSortedArrays(nums2,nums1);
+int findMedianSortedArraysoptimal(vector<int>& nums1, vector<int>& nums2) {
+    if(nums1.size()>nums2.size()) return findMedianSortedArraysoptimal(nums2,nums1);
     int n1=nums1.size();
     int n2=nums2.size();
     int n=n1+n2;
@@ -35,8 +35,7 @@ int findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
 }
 // better approach
 // time complexity O(min(n1,n2)) space complexity O(1)
-int findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
-    if(nums1.size()>nums2.size()) return findMedianSortedArrays(nums2,nums1);
+int findMedianSortedArraysbetter(vector<int>& nums1, vector<int>& nums2) {
     int n1=nums1.size();
     int n2=nums2.size();
     int i=0,j=0;
@@ -49,25 +48,26 @@ int findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
     while(i<n1 && j<n2){
         if(nums1[i]<nums2[j]){
             if(count==idx1) idxel1=nums1[i];
-            if(count==idx2) {idxel2=nums1[i]; break;}
+            if(count==idx2) idxel2=nums1[i];
             i++;
+            count++;
         }
         else{
             if(count==idx1) idxel1=nums2[j];
-            if(count==idx2) {idxel2=nums2[j]; break;}
+            if(count==idx2) idxel2=nums2[j]; 
             j++;
+            count++;
         }
-        count++;
     }
     while(i<n1){
         if(count==idx1) idxel1=nums1[i];
-        if(count==idx2) {idxel2=nums1[i]; break;}
+        if(count==idx2) idxel2=nums1[i];
         i++;
         count++;
     }
     while(j<n2){
         if(count==idx1) idxel1=nums2[j];
-        if(count==idx2) {idxel2=nums2[j]; break;}
+        if(count==idx2) idxel2=nums2[j];
         j++;
         count++;
     }
@@ -76,10 +76,10 @@ int findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
 }
 //time complexity O(n1+n2) space complexity O(n1+n2)
 //brute force approach
-int findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+int findMedianSortedArraysbrute(vector<int>& nums1, vector<int>& nums2) {
     int n1=nums1.size();
     int n2=nums2.size();
-   vector<int>nums3(n1+n2);
+   vector<int>nums3;
    int i=0,j=0;
    while(i<n1 && j<n2){
      if(nums1[i]<nums2[j]){
@@ -103,8 +103,10 @@ int findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
    return nums3[total/2];
 }
 int main(){
-    vector<int>nums1={1,3};
-    vector<int>nums2={2};
-    cout<<findMedianSortedArrays(nums1,nums2);
+    vector<int>nums1={1,3,4,7,10,12};
+    vector<int>nums2={2,3,6,15};
+    cout<<"optimal: "<<findMedianSortedArraysoptimal(nums1,nums2)<<endl;
+    cout<<"better: "<<findMedianSortedArraysbetter(nums1,nums2)<<endl;
+    cout<<"brute: "<<findMedianSortedArraysbrute(nums1,nums2)<<endl;
     return 0;
 }
