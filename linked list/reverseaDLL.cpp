@@ -56,6 +56,8 @@ class DoublyLinkedList{
         }
     }
     // optimal approach in terms of pointer manipulation
+    // TC: O(n) SC: O(1)
+    // only change the next and prev pointer of each node
     Node* reverseOptimal(){
         if(head == NULL || head->next == NULL) return head;
         Node* curr = head;
