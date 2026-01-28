@@ -3,6 +3,7 @@ using namespace std;
 // time complexity:O(k2 log(k)) where k is the number of arrays and l is the average length of each array
 // space complexity: O(1) for the heap sort and O(k) for the merging process
 // brute force approach: push all elements into a single array and then sort the array
+// approch 1
 vector<int> mergeKSortedArraysbrute(vector<vector<int>>& arr, int k) {
    vector<int> ans;
    for(int i=0;i<k;i++){
@@ -15,6 +16,7 @@ vector<int> mergeKSortedArraysbrute(vector<vector<int>>& arr, int k) {
     
    return ans;
 }
+// approach 2
 // time complexity:O(k2 log(k)) where k is the number of arrays and l is the average length of each array
 // s.c:o(k2)
 // push all elements into a min heap and then extract them to get a sorted array
@@ -37,6 +39,7 @@ vector<int> mergeKSortedArraysbrute(vector<vector<int>>& arr, int k) {
     
    return ans;
 }
+// approach 3
 // time complexity:O(k2 log(k)) where k is the number of arrays and l is the average length of each array
 // s.c O(k)
 vector<int>mergeKSortedArraysminheap(vector<vector<int>>&arr,int k){
@@ -61,6 +64,59 @@ vector<int>mergeKSortedArraysminheap(vector<vector<int>>&arr,int k){
         }
     }
     return ans;
+    // approach 4: using merge sort
+// time complexity:O(k2 log(k)) where k is the number of arrays and l
+}
+void merge(vector<int>&arr,int low,int mid,int high){
+    vector<int>temp;
+    int left=low;
+    int right=mid+1;
+    while(left<=mid && right<=high){
+        if(arr[left]<arr[right]){
+            temp.push_back(arr[left]);
+            left++;
+        }
+        else{
+            temp.push_back(arr[right]);
+            right++;
+        }
+    }
+    while(left<=mid){
+        temp.push_back(arr[left]);
+        left++;
+    }
+    while(right<=high){
+        temp.push_back(arr[right]);
+        right++;
+    }
+    for(int i=low;i<=high;i++){
+        arr[i]=temp[i-low];
+    }
+}
+void mergeSort(vector<int>&arr,int low,int high,int portion, int k){
+    // base case
+    if(portion<2){
+        return;
+    }
+    // mid index calculation based on portion
+    int mid=low+(portion/2)*k-1;
+    mergeSort(arr,low,mid,portion/2,k);
+    mergeSort(arr,mid+1,high,portion-portion/2,k);
+    merge(arr,low,mid,high);
+}
+// approach: at first copy all the element in a 1D array and then apply merge sort on that array considering k elements in each portion
+    vector<int> mergeArrays(vector<vector<int>> &arr) {
+        int n = arr.size();
+        int m = arr[0].size();
+        vector<int>ans;
+        for(int i =0;i<n;i++){
+            for(int j=0;j<m;j++){
+                ans.push_back(arr[i][j]);
+            }
+        }
+        mergeSort(ans,0,ans.size()-1,n,m);
+        return ans;
+        
 }
 int main(){
     int k=3;
