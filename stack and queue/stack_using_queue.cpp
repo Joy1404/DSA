@@ -30,9 +30,12 @@ class Stack{
     bool isEmpty(){
         return q.empty();
     }
+    int size(){
+        return q.size();
+    }
 };
 // method 2 using two queues
-class Stack{
+class Stack2{
     public:
     queue<int> q1;
     queue<int> q2;
@@ -40,25 +43,21 @@ class Stack{
         q1.push(data);
     }
     int peek(){
-       if(!q2.empty()){
-            return q2.front();
-        }
         if(q1.empty()){
             cout<<"Stack is empty"<<endl;
             return -1;
         }
-        while(!q1.empty()){
+        while(q1.size()>1){
             q2.push(q1.front());
             q1.pop();
         }
-        return q2.front();
+        int x=q1.front();
+        q2.push(x);
+        q1.pop();
+        swap(q1,q2);
+        return x;
     }
     int pop(){
-        if(!q2.empty()){
-            int x=q2.front();
-            q2.pop();
-            return x;
-        }
         if(q1.empty()){
             cout<<"Stack is empty"<<endl;
             return -1;
@@ -69,15 +68,19 @@ class Stack{
         }
         int x=q1.front();
         q1.pop();
+        swap(q1,q2);
         return x;
     }
     bool isEmpty(){
         return q1.empty();
     }
+    int size(){
+        return q1.size();
+    }
 };
 
 int main(){
-    Stack s;
+    Stack2 s;
     s.push(1);
     s.push(2);
     s.push(3);
