@@ -31,6 +31,8 @@ int rightHeight(TreeNode* root){
     }
     return height;
 }   
+// time complexity : O(log n * log n)
+// space complexity : O(log n)  
 // approach : if left height == right height then the tree is a complete binary tree and the number of nodes is 2^height - 1 and if not then recursively call the function for left and right subtrees and add 1 to the result  
     int countNodesoptimal(TreeNode* root) {
         if (!root) return 0;
