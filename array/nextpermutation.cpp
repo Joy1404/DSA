@@ -20,7 +20,7 @@ void nextPermutationBruteForce(vector<int>& nums) {
 void nextPermutation(vector<int>& nums) {
     int n= nums.size();
     int idx=-1;
-    // Step 1: Find the largest index i such that nums[i] < nums[i + 1]
+    // Step 1: Find the largest index i such that nums[i] < nums[i + 1] means first dip from the right
     for(int i=n-2; i>=0; i--) {
         if(nums[i] < nums[i + 1]) {
             idx = i;
@@ -32,7 +32,7 @@ void nextPermutation(vector<int>& nums) {
         reverse(nums.begin(), nums.end());
         return;
     }
-    // Step 2: Find the largest index j greater than i such that nums[i] < nums[j]
+    // Step 2: Find the largest index j greater than i such that nums[i] < nums[j] so that we can get the next larger number
     for(int j=n-1; j>idx; j--) {
         if(nums[j] > nums[idx]) {
             // Step 3: Swap the values at indices idx and j
