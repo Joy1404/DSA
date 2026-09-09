@@ -26,6 +26,7 @@ void buildtree(int l, int r, int i,vector<int>&arr,vector<int>&seg){
         vector<int>ans;
         buildtree(0,n-1,0,arr,seg);
         for(int i=0;i<queries.size();i++){
+            // 1-indexed queries, so we need to subtract 1 from the indices
            ans.push_back(rangeQuery(0,0,n-1,queries[i][0]-1,queries[i][1]-1,arr,seg));
         }
         return ans;
