@@ -16,6 +16,23 @@ long long binpower(long long base, long long exp)
     }
     return res;
 }
+double power(int x, int n){
+    int m = n;
+    double ans=1;
+    while(n>0){
+        if(n%2==1){
+            ans= ans*x;
+            n-=1;
+        }else{
+            n=n/2;
+            x = x*x;
+        }    
+    }
+        if(m<0){
+       ans = 1.0/ans;         
+    }
+return ans;
+}
 long long findpower(int a, int b)
 {
     if (b == 0)
@@ -25,4 +42,9 @@ long long findpower(int a, int b)
     if (b % 2 == 1)
         result = result * a;
     return result;
+}
+    int main(){
+    cout<<power(2,10)<<endl;
+    return 0;
+
 }
