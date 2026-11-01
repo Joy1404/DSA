@@ -4,10 +4,13 @@ const int mod = 1e9+7;
 typedef vector<vector<long long>> Matrix;
 
 Matrix matrixmultiplication(Matrix &A,Matrix&B){
-    Matrix result(2,vector<long long>(2,0));
-    for(int i=0;i<2;i++){
-        for(int j=0;j<2;j++){
-            for(int k=0;k<2;k++){
+    int n=A.size();
+    int m=B[0].size();
+    int p=B.size();
+    Matrix result(n,vector<long long>(m,0));
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            for(int k=0;k<p;k++){
                 result[i][j]=(result[i][j]+ A[i][k]*B[k][j])%mod;
             }
         }
